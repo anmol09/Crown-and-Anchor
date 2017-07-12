@@ -55,3 +55,8 @@ def money_won(bets,result):
 	return total_money		
 
 
+
+def check_player_money(total_current_money, money_earned):
+	for i in range(len(total_current_money)):
+		if total_current_money[i] == 0 && money_earned[i] ==0:
+			print("Player "+ i+ " is not eligible to play anymore")
