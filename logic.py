@@ -16,6 +16,8 @@ def spin_wheel():
 
 
 def money_won(bets,result):
+	total_money = []
+	profit_money = []
 	
 	for k in range(len(bets)):
 		if result[0] == result[1] == result[2]== 'anchor'==bets[k][5]:
