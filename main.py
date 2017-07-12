@@ -36,7 +36,14 @@ def betting(player_winnings):
       player_round = [0,0,0,0,0,0]
     
     
-  print(player_round)
+    print(player_round)
+    player_bets.append(player_round)
+    
+  print(player_bets)
+  return player_bets
+  
+  
+  
     
 
 def main():
