@@ -1,8 +1,18 @@
-def betting(player_winnings): 
+def is_broke(initial,spent):
+  total = (initial - spent)
+  
+  if total<0:
+    return True #player is broke
+    
+  else:
+    return False #player still has money
+  
+  
+def betting(player_budget): 
   
   player_bets = []
     
-  for i in range( len(player_winnings) ) : 
+  for i in range( len(player_budget) ) : 
     
     player_round = [0,0,0,0,0,0]
     
@@ -12,32 +22,64 @@ def betting(player_winnings):
     
       for c in [1,2,5,10]:
         
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on hearts: "))
-        player_round[0] = player_round[0] + (c*prompt)
+        bet = [0,0,0,0,0,0]
         
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on spades: "))
-        player_round[1] = player_round[1] + (c*prompt)
+        broke = True #must be true to run first time, will get corrected at end of while
         
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on diamonds: "))
-        player_round[2] = player_round[2] + (c*prompt)
+        while broke == True: #repeats 
           
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on clubs: "))
-        player_round[3] = player_round[3] + (c*prompt)
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on hearts: "))
+          bet[0] = (c*prompt)
           
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on crown: "))
-        player_round[4] = player_round[4] + (c*prompt)
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on spades: "))
+          bet[1] = (c*prompt)
           
-        prompt = int(input("How many " + str(c) + "$ chips do you want to bet on anchor: "))
-        player_round[5] = player_round[5] + (c*prompt)
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on diamonds: "))
+          bet[2] = (c*prompt)
+            
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on clubs: "))
+          bet[3] = (c*prompt)
+            
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on crown: "))
+          bet[4] = (c*prompt)
+            
+          prompt = int(input("How many " + str(c) + "$ chips do you want to bet on anchor: "))
+          bet[5] = (c*prompt)
+            
+          print("\n")
           
-        print("\n")
+          total_bet=0
+          for t in range(6):
+            total_bet = total_bet + bet[t] 
+          
+          broke = is_broke(player_budget[i],total_bet)
+          
+          if broke == True:
+            print("You don't have enough money to make these bets, try again!\n")
+            bet = [0,0,0,0,0,0] #all bets will be 0 
+            print("Current budget = " + str(player_budget[i]) + "\n")
+            
+          else: #places bets if player is not broke
+          
+            player_round[0] = player_round[0] + bet[0]
+            player_round[1] = player_round[1] + bet[1]
+            player_round[2] = player_round[2] + bet[2]
+            player_round[3] = player_round[3] + bet[3]
+            player_round[4] = player_round[4] + bet[4]
+            player_round[5] = player_round[5] + bet[5]
+            
+            player_budget[i] =  ( player_budget[i] - total_bet )
+            
+            print("Current budget = " + str(player_budget[i]) + "\n")
+
+          
           
     else: #player has skipped
-      player_round = [0,0,0,0,0,0]
+      player_round = [0,0,0,0,0,0] #all bets will be 0 
     
     
     print(player_round)
-    player_bets.append(player_round)
+    player_bets.append(player_round) #creates a list of lists with all bets
     
   print(player_bets)
   return player_bets
@@ -61,16 +103,12 @@ def main():
   Repeat the above steps while at least one player has money left.
   '''
   
-  #	options = { 1 : 'heart', 2 : 'spade' , 3 : 'diamond' , 4: 'club' , 5: 'crown', 6 : 'anchor' }
-  
-  player_winnings = [] #keeps track of winnings
+  player_budget = [] #keeps track of winnings
   
   for i in range(player_num): #starts everyone with 10$
-    player_winnings.append(10)
+    player_budget.append(10)
     
-  print(player_winnings)
-  
-  betting(player_winnings)
+  betting(player_budget) #starts betting prompts and logic
   
   
 
