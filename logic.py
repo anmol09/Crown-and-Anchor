@@ -23,8 +23,10 @@ def money_won(bets,result):
 			exit()
 
 
-	total_money = [0,0,0,0,0,0]
-	profit_money = [0,0,0,0,0,0]
+	for s in range(len(bets)):
+		total_money.append(0)
+		profit_money.append(0)
+
 
 
 	options = { 1 : 'heart', 2 : 'spade' , 3 : 'diamond' , 4: 'club' , 5: 'crown', 6 : 'anchor' }	
