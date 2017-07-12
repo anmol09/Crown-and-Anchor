@@ -71,4 +71,26 @@ def check_player_money(total_current_money, money_earned):
 		if total_current_money[i] == 0 and money_earned[i] ==0:
 			print("Player "+ i+ " is not eligible to play anymore")
 
+def end_game(my_list):
+	
+	count = 0
+
+	for i in range(len(my_list)):
+		if my_list[i] == 0:
+			count+=1
+
+	if count == len(my_list):
+		print("Better luck next time kids")
+		return True
+
+	elif count == len(my_list)-1:
+		for i in range(len(my_list)):
+			if my_list[i] != 0:
+				print("Player "+ str(i+1)+ " has one the game")
+				return True
+	else:
+		return False
+
+#end_game([0,1,0,0])
+
 #money_won([[2,3,4,56,2,3],[1,2,3,4,56,7]], ['heart','spade','spade'])
